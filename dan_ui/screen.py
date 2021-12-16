@@ -38,4 +38,4 @@ class Screen(Widget):
     def __call__(self, *args, **kwds):
         self.render()
         self.draw()
-        sleep(.0008)
+        sleep(.08)

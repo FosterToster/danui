@@ -12,5 +12,8 @@ class Label(Widget):
             y = rect.size.y - round((rect.life-128) * ((rect.size.y) / 128)) - 1
 
         
-        speed = 255 // 5
+        if y < 0:
+            y = 0
+        if y > rect.size.y - 1:
+            y = rect.size.y - 1
         rect.textout(Point(0,y), self.text)
