@@ -26,7 +26,6 @@ def main():
             Rows(
                 children=[
                     Panel(child=Label("Hello, world!")),
-                    Diagonal(),
                     Panel(child=Label("Hello, world!")),
                 ]
             ),
