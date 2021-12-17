@@ -10,7 +10,7 @@ class Cols(Widget, Childrened):
                     y=0
                 ),
                 size=Point(
-                    x=round(rect.size.x/len(self.children)),
+                    x=round(rect.size.x / len(self.children)) if num != (len(self.children) - 1) else rect.size.x - num * round(rect.size.x/len(self.children)),
                     y=rect.size.y
                 )
             )
@@ -26,7 +26,7 @@ class Rows(Widget, Childrened):
                 ),
                 size=Point(
                     x=rect.size.x,
-                    y=round(rect.size.y/len(self.children))
+                    y=round(rect.size.y/len(self.children)) if num != len(self.children) - 1 else rect.size.y - num * round(rect.size.y / len(self.children))
                 )
             )
             child.render(new_rect)
