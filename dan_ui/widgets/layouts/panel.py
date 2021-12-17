@@ -7,5 +7,5 @@ class Panel(Widget, Childed):
             br=rect.size
         ), pen="█")
 
-        self.child.render(rect.child(offset=Point(1,1), size=Point(rect.size.x-1, rect.size.y-1)))
+        self.child.render(rect.child(offset=Point(1,1), size=Point(rect.size.x-2, rect.size.y-2)))
         
