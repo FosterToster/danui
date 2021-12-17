@@ -10,6 +10,45 @@ class Diagonal(Widget):
         rect.line(Point(1,1), rect.size)
 
 
+class Loader(Label):
+    def render(self, rect: DrawRect):
+        states = [
+            
+            '▓         ',
+            '▒▓        ',
+            '▒▒▓       ',
+            '░▒▒▓      ',
+            ' ░▒▒▓     ',
+            '  ░▒▒▓    ',
+            '   ░▒▒▓   ',
+            '    ░▒▒▓  ',
+            '     ░▒▒▓ ',
+            '      ░▒▒▓',
+            '       ░▒▓',
+            '        ░▓',
+            '         ▓',
+            '        ▓▒',
+            '       ▓▒▒',
+            '      ▓▒▒░',
+            '     ▓▒▒░ ',
+            '    ▓▒▒░  ',
+            '   ▓▒▒░   ',
+            '  ▓▒▒░    ',
+            ' ▓▒▒░     ',
+            '▓▒▒░      ',
+            '▓▒░       ',
+            '▓░        ',
+        ]
+
+        self.text = states[rect.life % len(states)]
+
+        rect.textout(Point(
+            x=rect.size.x // 2 - len(self.text) // 2,
+            y=rect.size.y // 2,
+            
+        ),
+        self.text)
+
 
 def main():
     # screen = Screen(Diagonal())
@@ -17,9 +56,9 @@ def main():
         Cols(children=[
             Rows(
                 children=[
-                    Panel(child=Label("Hello, world!")),
-                    Panel(child=Label("Hello, world!")),
-                    Panel(child=Label("Hello, world!")),
+                    Panel(child=Loader("Hello, world!")),
+                    Panel(child=Label("Hello,\n world!")),
+                    Panel(child=Label("Hello, super long string world!")),
                     Panel(child=Label("Hello, world!")),
                 ]
             ),
