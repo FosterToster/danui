@@ -4,6 +4,9 @@ import os
 import sys
 from time import sleep
 
+
+
+
 class Screen(Widget):
     def __init__(self, widget: Widget) -> None:
         self.widget = widget
@@ -15,12 +18,12 @@ class Screen(Widget):
             for char in line:
                 screen_array += char
 
-        sys.stdout.write(screen_array)
-        sys.stdout.flush()
+        sys.stdout.write('\n'+screen_array)
+        # sys.stdout.flush()
 
     def render(self):
         self.life += 1
-        if self.life == 256:
+        if self.life == 10000:
             self.life = 0
 
         term = os.get_terminal_size()
@@ -38,4 +41,4 @@ class Screen(Widget):
     def __call__(self, *args, **kwds):
         self.render()
         self.draw()
-        sleep(.08)
+        sleep(.1)
