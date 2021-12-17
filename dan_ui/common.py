@@ -100,15 +100,52 @@ class DrawRect:
             self.set(point, pen)
 
     def set(self, where:Point, what:str):
+        if (where.x > self.size.x):
+            where.x = self.size.x
+        elif where.x < 0:
+            where.x = 0
+
+        if (where.y > self.size.y):
+            where.y = self.size.y
+        elif where.y < 0:
+            where.y = 0
+
         end_x = where.x+self.offset.x
         end_y = where.y+self.offset.y
+
+        
+       
         if end_y >= len(self.screen):
             end_y = len(self.screen) - 1
+        elif end_y < 0:
+            end_y = 0
+
         if end_x >= len(self.screen[0]):
             end_x = len(self.screen[0])-1
+        
+        elif end_x < 0:
+            end_x = 0
 
         self.screen[end_y][end_x] = what
 
     def textout(self, where: Point, text:str):
-        for i, char in enumerate(text):
-            self.set(Point(where.x+i, where.y), char)
+        x = where.x
+        y = where.y
+        for char in text:
+            if char == '\n':
+                y += 1
+                x = where.x
+                continue
+        
+            if x > self.size.x:
+                self.set(Point(self.size.x, y), '>')
+                break
+            if x < 0:
+                self.set(Point(0, y), '<')
+                break
+
+            if y < 0 or y > self.size.y:
+                break
+
+            self.set(Point(x, y), char)
+            x += 1
