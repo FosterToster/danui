@@ -27,11 +27,11 @@ class Screen(Widget):
             self.life = 0
 
         term = os.get_terminal_size()
-        self.screen = list(list(' '*term.columns) for _ in range(term.lines))
+        self.screen = list(list(' '*term.columns) for _ in range(term.lines-1))
         self.widget.render(
             DrawRect(
                 screen=self.screen,
-                offset=Point(0,1),
+                offset=Point(0,0),
                 size=Point(term.columns-1, term.lines-2),
                 life=self.life
             )
