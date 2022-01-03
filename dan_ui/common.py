@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from time import perf_counter
 from typing import Generator, Iterable, List, Tuple, Union
 from math import sqrt
 
@@ -149,3 +150,19 @@ class DrawRect:
 
             self.set(Point(x, y), char)
             x += 1
+
+    @property
+    def top_left(self) -> Point:
+        return Point(0,0)
+
+    @property
+    def top_right(self) -> Point:
+        return Point(self.size.x, 0)
+
+    @property
+    def bottom_left(self) -> Point:
+        return Point(0, self.size.y)
+
+    @property
+    def bottom_right(self) -> Point:
+        return self.size.clone()

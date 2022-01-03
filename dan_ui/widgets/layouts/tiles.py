@@ -1,7 +1,7 @@
 from . import Widget, DrawRect, Rect, Point
 from .. import Childrened
 
-class Cols(Widget, Childrened):
+class Cols(Childrened, Widget):
     def render(self, rect: DrawRect):
         for num, child in enumerate(self.children):
             new_rect = rect.child(
@@ -16,10 +16,8 @@ class Cols(Widget, Childrened):
             )
             child.render(new_rect)
 
-    def update(self):
-        return super().update()
 
-class Rows(Widget, Childrened):
+class Rows(Childrened, Widget):
     def render(self, rect: DrawRect):
         for num, child in enumerate(self.children):
             new_rect = rect.child(
@@ -33,6 +31,3 @@ class Rows(Widget, Childrened):
                 )
             )
             child.render(new_rect)
-
-    def update(self):
-        return super().update()

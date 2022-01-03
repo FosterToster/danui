@@ -5,80 +5,27 @@ from dan_ui.widgets.layouts.tiles import Cols, Rows
 
 from dan_ui.widgets import Widget, DrawRect, Point
 
-class Diagonal(Widget):
+from layoits import Main, SidebaredMain, List, ActiveChat, TextInput, Messages
+from components import ConnectionStatus, Loader
+
+
+class Dot(Widget):
+    def update(self):
+        ...
+
     def render(self, rect: DrawRect):
-        rect.line(Point(1,1), rect.size)
-
-
-class Loader(Label):
-    def render(self, rect: DrawRect):
-        states = [
-            
-            '▓         ',
-            '▒▓        ',
-            '▒▒▓       ',
-            '░▒▒▓      ',
-            ' ░▒▒▓     ',
-            '  ░▒▒▓    ',
-            '   ░▒▒▓   ',
-            '    ░▒▒▓  ',
-            '     ░▒▒▓ ',
-            '      ░▒▒▓',
-            '       ░▒▓',
-            '        ░▓',
-            '         ▓',
-            '        ▓▒',
-            '       ▓▒▒',
-            '      ▓▒▒░',
-            '     ▓▒▒░ ',
-            '    ▓▒▒░  ',
-            '   ▓▒▒░   ',
-            '  ▓▒▒░    ',
-            ' ▓▒▒░     ',
-            '▓▒▒░      ',
-            '▓▒░       ',
-            '▓░        ',
-        ]
-
-        self.text = states[rect.life % len(states)]
-
-        rect.textout(Point(
-            x=rect.size.x // 2 - len(self.text) // 2,
-            y=rect.size.y // 2,
-            
-        ),
-        self.text)
-
+        rect.set(Point(0,0), '0')
+        rect.set(rect.size, '0')
 
 def main():
-    # screen = Screen(Diagonal())
-    screen = Screen(
-        Cols(children=[
-            Rows(
-                children=[
-                    Panel(child=Loader("Hello, world!")),
-                    Panel(child=Label("Hello,\n world!")),
-                    Panel(child=Label("Hello, super long string world!")),
-                    Panel(child=Label("Hello, world!")),
-                ]
-            ),
-            Rows(
-                children=[
-                    Panel(child=Label("Hello, world!")),
-                    Panel(child=Label("Hello, world!")),
-                ]
-            ),
-            Rows(
-                children=[
-                    Panel(child=Label("Hello, world!")),
-                    Panel(child=Label("Hello, world!")),
-                    Panel(child=Label("Hello, world!")),
-                    Panel(child=Label("Hello, world!")),
-                ]
-            )            
-        ])
-        
-    )
+    screen = Screen(Main(
+        header=ConnectionStatus(),
+        main=SidebaredMain(
+            List(),
+            ActiveChat(Messages(), TextInput()),
+        ),
+        footer=Loader(),
+    ), frame_time=0.1)
 
     while True:
         screen()
