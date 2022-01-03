@@ -5,6 +5,9 @@ class Label(Widget):
     def __init__(self, text='') -> None:
         self.text = text
 
+    def update(self):
+        return super().update()
+
     def render(self, rect: DrawRect):
 
         rect.textout(Point(0,0), self.text)

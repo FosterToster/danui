@@ -16,6 +16,9 @@ class Cols(Widget, Childrened):
             )
             child.render(new_rect)
 
+    def update(self):
+        return super().update()
+
 class Rows(Widget, Childrened):
     def render(self, rect: DrawRect):
         for num, child in enumerate(self.children):
@@ -30,3 +33,6 @@ class Rows(Widget, Childrened):
                 )
             )
             child.render(new_rect)
+
+    def update(self):
+        return super().update()

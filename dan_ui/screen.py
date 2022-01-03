@@ -3,15 +3,20 @@ from .common import Rect, Point, DrawRect
 import os
 import sys
 from time import sleep
+from datetime import datetime
 
 
 
 
 class Screen(Widget):
-    def __init__(self, widget: Widget) -> None:
+    def __init__(self, widget: Widget, frame_time) -> None:
         self.widget = widget
         self.life = 0
+        self.frame_time = frame_time
         
+    def update(self):
+        self.widget.update()
+
     def draw(self):
         screen_array = ''
         for line in self.screen:
@@ -39,6 +44,7 @@ class Screen(Widget):
         
     
     def __call__(self, *args, **kwds):
+        self.update()
         self.render()
         self.draw()
         sleep(.1)
